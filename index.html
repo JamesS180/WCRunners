@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>West Country Race Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e9eff5;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #1a4a75; /* Dark blue */
+            color: white;
+            padding: 1.5em 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav {
+            background-color: #2a639b; /* Slightly lighter blue */
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 18px 22px;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #3a7dc4; /* Even lighter blue on hover */
+        }
+        nav a.active {
+            background-color: #133a5e; /* Darker active tab */
+            font-weight: bold;
+        }
+        .container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .tabcontent {
+            display: none;
+            padding: 20px 0;
+            animation: fadeIn 0.5s;
+        }
+        .tabcontent.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        h2 {
+            color: #1a4a75;
+            border-bottom: 2px solid #e9eff5;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f8ff; /* Light blueish grey */
+            font-weight: bold;
+            color: #1a4a75;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #eef7ff;
+        }
+        td a {
+            color: #2a639b;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        .racecourse-section {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .racecourse-section h3 {
+            margin-top: 0;
+            color: #2a639b;
+            font-size: 1.5em;
+            border-bottom: 1px dashed #d0d0d0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .runner-entry {
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 3px solid #6cb6ff; /* Accent color */
+        }
+        .runner-entry strong {
+            color: #1a4a75;
+            font-size: 1.1em;
+        }
+        .runner-entry span {
+            display: block;
+            margin-top: 5px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>West Country Race Tracker</h1>
+    </header>
+
+    <nav>
+        <a href="#" onclick="openTab(event, 'TodayRunners')" id="defaultOpen" class="tablink">Today's Runners</a>
+        <a href="#" onclick="openTab(event, 'TomorrowRunners')" class="tablink">Tomorrow's Runners</a>
+        <a href="#" onclick="openTab(event, 'TrainersList')" class="tablink">Trainers List</a>
+    </nav>
+
+    <div class="container">
+        <div id="TodayRunners" class="tabcontent">
+            <h2>Today's Runners (Saturday, July 5, 2025)</h2>
+            <div id="today-runners-content">
+                <p>Loading today's runners...</p>
+            </div>
+        </div>
+
+        <div id="TomorrowRunners" class="tabcontent">
+            <h2>Tomorrow's Runners (Sunday, July 6, 2025)</h2>
+            <div id="tomorrow-runners-content">
+                <p>Loading tomorrow's runners...</p>
+            </div>
+        </div>
+
+        <div id="TrainersList" class="tabcontent">
+            <h2>West Country Trainers List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Trainer Name</th>
+                        <th>County</th>
+                        <th>Data Resources</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rod Millman</td>
+                        <td>Devon</td>
+                        <td>
+                            <a href="https://www.racingpost.com/profile/trainer/4550/rod-millman" target="_blank">Racing Post</a>,
+                            <a href="https://www.sportinglife.com/racing/profiles/trainer/2173/future-entries" target="_blank">Sporting Life</a>,
+                            <a href="https://www.racingtv.com/profiles/trainer/rod-millman" target="_blank">Racing TV</a>,
+                            <a href="https://www.racingtips.com/trainer-profile/rod-millman/" target="_blank">Racing Tips</a>,
+                            <a href="https://gg.co.uk/trainer/rod-millman/" target="_blank">GG.co.uk</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Adrian Wintle</td>
+                        <td>Glos</td>
+                        <td>
+                            <a href="https://www.racingpost.com/profile/trainer/6845/adrian-wintle" target="_blank">Racing Post</a>,
+                            <a href="https://www.sportinglife.com/racing/profiles/trainer/1662" target="_blank">Sporting Life</a>,
+                            <a href="https://www.racingtv.com/profiles/trainer/a-wintle-24726" target="_blank">Racing TV</a>,
+                            <a href="https://www.flatstats.co.uk/both/trainer/adrian-wintle" target="_blank">Flat Stats</a>,
+                            <a href="https://www.racingtips.com/trainer-profile/adrian-wintle/" target="_blank">Racing Tips</a>,
+                            <a href="https://gg.co.uk/trainer/adrian-wintle/" target="_blank">GG.co.uk</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Function to control tab switching
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none"; // Hide all tab content
+            }
+            tablinks = document.getElementsByClassName("tablink"); // Get all tab buttons
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", ""); // Remove 'active' class from all buttons
+            }
+            document.getElementById(tabName).style.display = "block"; // Show the specific tab content
+            evt.currentTarget.className += " active"; // Add 'active' class to the clicked button
+        }
+
+        // --- Data for Saturday, July 5, 2025 (Manually Injected for Test) ---
+        // This is where your daily runner data would eventually go.
+        // For this test, it's hardcoded based on our previous conversation.
+        const todayRunnersData = {
+            "Haydock": [
+                {
+                    "horse": "SANTA SAVANA",
+                    "trainer": "Rod Millman",
+                    "race": "BEST ODDS GUARANTEED AT BET365 HANDICAP (3)",
+                    "jockey": "Lewis Edmunds",
+                    "time": "16:55"
+                }
+            ],
+            "Leicester": [
+                {
+                    "horse": "SWEET SONATA",
+                    "trainer": "Rod Millman",
+                    "race": "MARK WEST PINOT NOIR FILLIES' HANDICAP (5)",
+                    "jockey": "George Wood",
+                    "time": "18:48"
+                },
+                {
+                    "horse": "VAUNTED",
+                    "trainer": "Adrian Wintle",
+                    "race": "MARK WEST PINOT NOIR FILLIES' HANDICAP (5)",
+                    "jockey": "Finley Marsh",
+                    "time": "18:48"
+                },
+                {
+                    "horse": "PESSOA",
+                    "trainer": "Adrian Wintle",
+                    "race": "HIGH NOON BLACK CHERRY VODKA SODA HANDICAP (6)",
+                    "jockey": "Taryn Langley",
+                    "time": "18:18"
+                },
+                {
+                    "horse": "THE PUG",
+                    "trainer": "Adrian Wintle",
+                    "race": "DARK HORSE CHARDONNAY HANDICAP (6)",
+                    "jockey": "Jockey TBD", // Placeholder if not found
+                    "time": "17:10"
+                }
+            ],
+            "Nottingham": [
+                {
+                    "horse": "BE AN ANGEL",
+                    "trainer": "Rod Millman",
+                    "race": "JOY SILVESTER BARBERING HANDICAP (5)",
+                    "jockey": "Oliver Searle",
+                    "time": "17:53"
+                }
+            ]
+        };
+
+        // Function to render (display) the runner data
+        function renderRunners(targetElementId, data) {
+            let htmlContent = '';
+            if (Object.keys(data).length === 0) {
+                htmlContent = '<p>No runners found for this day from selected trainers.</p>';
+            } else {
+                // Iterate through each racecourse
+                for (const course in data) {
+                    htmlContent += `<div class="racecourse-section"><h3>${course}</h3>`;
+                    // Sort runners within each course by time for better readability
+                    data[course].sort((a, b) => a.time.localeCompare(b.time));
+                    // Iterate through each runner for the current racecourse
+                    data[course].forEach(runner => {
+                        htmlContent += `
+                            <div class="runner-entry">
+                                <strong>${runner.horse}</strong><br>
+                                <span>Race: ${runner.race}</span><br>
+                                <span>Jockey: ${runner.jockey}</span><br>
+                                <span>Time: ${runner.time}</span><br>
+                                <span>Trainer: ${runner.trainer}</span>
+                            </div>
+                        `;
+                    });
+                    htmlContent += `</div>`; // Close racecourse-section div
+                }
+            }
+            document.getElementById(targetElementId).innerHTML = htmlContent; // Insert generated HTML into the page
+        }
+
+        // --- Initialisation when the page loads ---
+        document.addEventListener("DOMContentLoaded", function() {
+            // Automatically click the "Today's Runners" tab to show it first
+            document.getElementById("defaultOpen").click();
+            // Call the function to display today's runners using the hardcoded data
+            renderRunners('today-runners-content', todayRunnersData);
+            // If you had tomorrow's data, you'd call renderRunners for that tab too:
+            // const tomorrowRunnersData = { /* Your tomorrow's data here */ };
+            // renderRunners('tomorrow-runners-content', tomorrowRunnersData);
+        });
+    </script>
+
+</body>
+</html>
